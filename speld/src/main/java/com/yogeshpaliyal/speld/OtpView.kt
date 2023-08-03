@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -105,10 +106,8 @@ fun PinInput(
                         MaterialTheme.colors.primary.copy(alpha = 0.1f),
                         shape = RoundedCornerShape(3.dp)
                     )
-                    .clickable {
-                        focusRequester.requestFocus()
-                        keyboard?.show()
-                    },
+                    .onFocusChanged { focusRequester.requestFocus() }
+                    .clickable { keyboard?.show() },
                 value = value.getOrNull(it),
                 isCursorVisible = value.length == it,
                 obscureText
